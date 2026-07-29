@@ -40,14 +40,16 @@ services:
           name: bookstore-backend-api
           property: host
 
+  # Redis Cache Service
+  - type: redis
+    name: bookstore-redis-cache
+    plan: free
+    region: oregon
+    maxmemoryPolicy: allkeys-lru
+
 databases:
   - name: bookstore-postgres-db
     databaseName: bookstoredb
     user: postgres
-    plan: free
-    region: oregon
-
-redis:
-  - name: bookstore-redis-cache
     plan: free
     region: oregon
