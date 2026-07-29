@@ -3,17 +3,9 @@ package com.bookstore.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class RegisterRequest {
 
     @NotBlank(message = "Username is required")
@@ -32,4 +24,51 @@ public class RegisterRequest {
     private String fullName;
 
     private Set<String> roles;
+
+    public RegisterRequest() {}
+
+    public RegisterRequest(String username, String email, String password, String fullName, Set<String> roles) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.fullName = fullName;
+        this.roles = roles;
+    }
+
+    public static RegisterRequestBuilder builder() {
+        return new RegisterRequestBuilder();
+    }
+
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
+
+    public String getFullName() { return fullName; }
+    public void setFullName(String fullName) { this.fullName = fullName; }
+
+    public Set<String> getRoles() { return roles; }
+    public void setRoles(Set<String> roles) { this.roles = roles; }
+
+    public static class RegisterRequestBuilder {
+        private String username;
+        private String email;
+        private String password;
+        private String fullName;
+        private Set<String> roles;
+
+        public RegisterRequestBuilder username(String username) { this.username = username; return this; }
+        public RegisterRequestBuilder email(String email) { this.email = email; return this; }
+        public RegisterRequestBuilder password(String password) { this.password = password; return this; }
+        public RegisterRequestBuilder fullName(String fullName) { this.fullName = fullName; return this; }
+        public RegisterRequestBuilder roles(Set<String> roles) { this.roles = roles; return this; }
+
+        public RegisterRequest build() {
+            return new RegisterRequest(username, email, password, fullName, roles);
+        }
+    }
 }

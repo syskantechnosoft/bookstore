@@ -1,0 +1,53 @@
+services:
+  # Spring Boot Backend API Web Service
+  - type: web
+    name: bookstore-backend-api
+    runtime: docker
+    context: ./backend
+    dockerfile: Dockerfile
+    plan: free
+    region: oregon
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: postgres
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: bookstore-postgres-db
+          property: connectionString
+      - key: SPRING_REDIS_HOST
+        fromService:
+          type: redis
+          name: bookstore-redis-cache
+          property: host
+      - key: SPRING_REDIS_PORT
+        fromService:
+          type: redis
+          name: bookstore-redis-cache
+          property: port
+
+  # React Frontend Web Service
+  - type: web
+    name: bookstore-frontend-ui
+    runtime: docker
+    context: ./frontend
+    dockerfile: Dockerfile
+    plan: free
+    region: oregon
+    envVars:
+      - key: VITE_API_BASE_URL
+        fromService:
+          type: web
+          name: bookstore-backend-api
+          property: host
+
+databases:
+  - name: bookstore-postgres-db
+    databaseName: bookstoredb
+    user: postgres
+    plan: free
+    region: oregon
+
+redis:
+  - name: bookstore-redis-cache
+    plan: free
+    region: oregon

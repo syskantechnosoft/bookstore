@@ -5,17 +5,11 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.*;
 
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "books")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Book {
 
     @Id
@@ -59,4 +53,75 @@ public class Book {
     @Size(max = 1000, message = "Description cannot exceed 1000 characters")
     @Column(length = 1000)
     private String description;
+
+    public Book() {}
+
+    public Book(Long id, String title, String author, String isbn, BigDecimal price, Integer publishedYear, String genre, Integer stock, String description) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.price = price;
+        this.publishedYear = publishedYear;
+        this.genre = genre;
+        this.stock = stock;
+        this.description = description;
+    }
+
+    public static BookBuilder builder() {
+        return new BookBuilder();
+    }
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
+
+    public String getAuthor() { return author; }
+    public void setAuthor(String author) { this.author = author; }
+
+    public String getIsbn() { return isbn; }
+    public void setIsbn(String isbn) { this.isbn = isbn; }
+
+    public BigDecimal getPrice() { return price; }
+    public void setPrice(BigDecimal price) { this.price = price; }
+
+    public Integer getPublishedYear() { return publishedYear; }
+    public void setPublishedYear(Integer publishedYear) { this.publishedYear = publishedYear; }
+
+    public String getGenre() { return genre; }
+    public void setGenre(String genre) { this.genre = genre; }
+
+    public Integer getStock() { return stock; }
+    public void setStock(Integer stock) { this.stock = stock; }
+
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+
+    public static class BookBuilder {
+        private Long id;
+        private String title;
+        private String author;
+        private String isbn;
+        private BigDecimal price;
+        private Integer publishedYear;
+        private String genre;
+        private Integer stock;
+        private String description;
+
+        public BookBuilder id(Long id) { this.id = id; return this; }
+        public BookBuilder title(String title) { this.title = title; return this; }
+        public BookBuilder author(String author) { this.author = author; return this; }
+        public BookBuilder isbn(String isbn) { this.isbn = isbn; return this; }
+        public BookBuilder price(BigDecimal price) { this.price = price; return this; }
+        public BookBuilder publishedYear(Integer publishedYear) { this.publishedYear = publishedYear; return this; }
+        public BookBuilder genre(String genre) { this.genre = genre; return this; }
+        public BookBuilder stock(Integer stock) { this.stock = stock; return this; }
+        public BookBuilder description(String description) { this.description = description; return this; }
+
+        public Book build() {
+            return new Book(id, title, author, isbn, price, publishedYear, genre, stock, description);
+        }
+    }
 }

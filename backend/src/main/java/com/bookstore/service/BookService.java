@@ -3,7 +3,6 @@ package com.bookstore.service;
 import com.bookstore.dto.BookDto;
 import com.bookstore.entity.Book;
 import com.bookstore.repository.BookRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -12,10 +11,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@RequiredArgsConstructor
 public class BookService {
 
     private final BookRepository bookRepository;
+
+    public BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
 
     @Transactional(readOnly = true)
     public Page<BookDto> getAllBooks(String query, String genre, Pageable pageable) {
