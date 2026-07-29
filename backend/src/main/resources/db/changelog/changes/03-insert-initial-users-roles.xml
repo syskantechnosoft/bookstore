@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="03-insert-roles-v2" author="bookstore">
+    <changeSet id="03-insert-roles-v3" author="bookstore">
         <insert tableName="roles">
             <column name="name" value="ROLE_ADMIN"/>
         </insert>
@@ -22,7 +22,7 @@
          librarian -> Librarian@123 ($2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.85UXZ9e/yZ7uM1k.PzRmi)
          user -> User@123 ($2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.85UXZ9e/yZ7uM1k.PzRmi)
     -->
-    <changeSet id="03-insert-users-v2" author="bookstore">
+    <changeSet id="03-insert-users-v3" author="bookstore">
         <insert tableName="users">
             <column name="username" value="admin"/>
             <column name="email" value="admin@bookstore.com"/>
@@ -43,11 +43,29 @@
         </insert>
     </changeSet>
 
-    <changeSet id="03-insert-user-roles-v2" author="bookstore">
+    <changeSet id="03-insert-user-roles-v3" author="bookstore">
         <sql>
             INSERT INTO user_roles (user_id, role_id) SELECT u.id, r.id FROM users u, roles r WHERE u.username = 'admin' AND r.name = 'ROLE_ADMIN';
             INSERT INTO user_roles (user_id, role_id) SELECT u.id, r.id FROM users u, roles r WHERE u.username = 'librarian' AND r.name = 'ROLE_LIBRARIAN';
             INSERT INTO user_roles (user_id, role_id) SELECT u.id, r.id FROM users u, roles r WHERE u.username = 'user' AND r.name = 'ROLE_USER';
+        </sql>
+    </changeSet>
+
+    <changeSet id="03-sync-identity-sequences" author="bookstore">
+        <sql dbms="h2">
+            ALTER TABLE users ALTER COLUMN id RESTART WITH 100;
+            ALTER TABLE roles ALTER COLUMN id RESTART WITH 100;
+            ALTER TABLE books ALTER COLUMN id RESTART WITH 500;
+        </sql>
+        <sql dbms="postgresql">
+            SELECT setval(pg_get_serial_sequence('users', 'id'), coalesce(max(id), 1) + 100) FROM users;
+            SELECT setval(pg_get_serial_sequence('roles', 'id'), coalesce(max(id), 1) + 100) FROM roles;
+            SELECT setval(pg_get_serial_sequence('books', 'id'), coalesce(max(id), 1) + 500) FROM books;
+        </sql>
+        <sql dbms="mysql">
+            ALTER TABLE users AUTO_INCREMENT = 100;
+            ALTER TABLE roles AUTO_INCREMENT = 100;
+            ALTER TABLE books AUTO_INCREMENT = 500;
         </sql>
     </changeSet>
 
