@@ -26,8 +26,9 @@ services:
           property: port
 
   # React Frontend Free Static Web Application
-  - type: static
+  - type: web
     name: bookstore-frontend-ui
+    env: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: ./frontend/dist
     routes:
