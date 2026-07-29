@@ -13,7 +13,7 @@ services:
       - key: SPRING_DATASOURCE_URL
         fromDatabase:
           name: bookstore-postgres-db
-          property: connectionString
+          property: jdbcConnectionString
       - key: SPRING_REDIS_HOST
         fromService:
           type: redis
