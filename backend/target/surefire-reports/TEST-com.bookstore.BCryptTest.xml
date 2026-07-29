@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.bookstore.controller.AuthControllerTest" time="33.773" tests="4" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.bookstore.BCryptTest" time="1.094" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -11,10 +11,8 @@
     <property name="user.variant" value=""/>
     <property name="java.vendor.url" value="https://java.oracle.com/"/>
     <property name="user.timezone" value="Asia/Calcutta"/>
-    <property name="org.jboss.logging.provider" value="slf4j"/>
     <property name="os.name" value="Windows 11"/>
     <property name="java.vm.specification.version" value="25"/>
-    <property name="APPLICATION_NAME" value="bookstore-backend"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="IN"/>
     <property name="sun.boot.library.path" value="D:\dev_env\JDK25\bin"/>
@@ -34,8 +32,6 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="FILE_LOG_CHARSET" value="UTF-8"/>
-    <property name="java.awt.headless" value="true"/>
     <property name="surefire.real.class.path" value="C:\Users\Siva\AppData\Local\Temp\surefire16749454650812926757\surefirebooter-20260729141931728_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -50,14 +46,11 @@
     <property name="localRepository" value="C:\Users\Siva\.m2\repository"/>
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
     <property name="java.io.tmpdir" value="C:\Users\Siva\AppData\Local\Temp\"/>
-    <property name="com.zaxxer.hikari.pool_number" value="1"/>
     <property name="java.version" value="25.0.3"/>
     <property name="user.dir" value="C:\Users\Siva\.gemini\antigravity\scratch\bookstore\backend"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="27132"/>
     <property name="sun.os.patch.level" value=""/>
-    <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
     <property name="native.encoding" value="Cp1252"/>
     <property name="java.library.path" value="D:\dev_env\JDK25\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Users/Siva/.gemini/antigravity/bin;C:\Users\Siva\AppData\Roaming\Antigravity\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\Tailscale\;D:\dev_env\nodejs\;D:\dev_env\python3.12\;D:\dev_env\VS_Code\Microsoft VS Code\bin;C:\maven3.9\bin;C:\Program Files\GitHub CLI\;C:\Users\Siva\AppData\Local\pnpm\bin;D:\dev_env\;C:\Users\Siva\AppData\Local\Programs\Python\Launcher\;C:\Users\Siva\AppData\Local\Microsoft\WindowsApps;C:\Users\Siva\AppData\Local\PowerToys\DSCModules\;C:\Users\Siva\AppData\Roaming\npm;C:\Users\Siva\AppData\Local\Python\bin;C:\Users\Siva\AppData\Local\OpenClaw\deps\portable-git\mingw64\bin;C:\Users\Siva\AppData\Local\OpenClaw\deps\portable-git\usr\bin;C:\Program Files\GitHub CLI\;;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
@@ -67,171 +60,11 @@
     <property name="stdin.encoding" value="Cp1252"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="69.0"/>
-    <property name="LOGGED_APPLICATION_NAME" value="[bookstore-backend] "/>
   </properties>
-  <testcase name="testLogin_Success" classname="com.bookstore.controller.AuthControllerTest" time="0.702">
-    <system-out><![CDATA[14:19:34.948 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.bookstore.controller.AuthControllerTest]: AuthControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-14:19:35.340 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.bookstore.BookstoreApplication for test class com.bookstore.controller.AuthControllerTest
-
-  .   ____          _            __ _ _
- /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
- \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-  '  |____| .__|_| |_|_| |_\__, | / / / /
- =========|_|==============|___/=/_/_/_/
-
- :: Spring Boot ::                (v3.4.3)
-
-2026-07-29T14:19:36.407+05:30  INFO 27132 --- [bookstore-backend] [           main] c.b.controller.AuthControllerTest        : Starting AuthControllerTest using Java 25.0.3 with PID 27132 (started by Siva in C:\Users\Siva\.gemini\antigravity\scratch\bookstore\backend)
-2026-07-29T14:19:36.415+05:30  INFO 27132 --- [bookstore-backend] [           main] c.b.controller.AuthControllerTest        : The following 1 profile is active: "h2"
-2026-07-29T14:19:39.552+05:30  INFO 27132 --- [bookstore-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2026-07-29T14:19:39.559+05:30  INFO 27132 --- [bookstore-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-07-29T14:19:39.983+05:30  INFO 27132 --- [bookstore-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 394 ms. Found 3 JPA repository interfaces.
-2026-07-29T14:19:40.026+05:30  INFO 27132 --- [bookstore-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2026-07-29T14:19:40.028+05:30  INFO 27132 --- [bookstore-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2026-07-29T14:19:40.066+05:30  INFO 27132 --- [bookstore-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.bookstore.repository.BookRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2026-07-29T14:19:40.066+05:30  INFO 27132 --- [bookstore-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.bookstore.repository.RoleRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2026-07-29T14:19:40.067+05:30  INFO 27132 --- [bookstore-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.bookstore.repository.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2026-07-29T14:19:40.067+05:30  INFO 27132 --- [bookstore-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15 ms. Found 0 Redis repository interfaces.
-2026-07-29T14:19:43.908+05:30  INFO 27132 --- [bookstore-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-07-29T14:19:44.669+05:30  INFO 27132 --- [bookstore-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:bookstoredb user=SA
-2026-07-29T14:19:44.677+05:30  INFO 27132 --- [bookstore-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-07-29T14:19:44.983+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.database                       : Set default schema name to PUBLIC
-2026-07-29T14:19:47.058+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : Creating database history table with name: PUBLIC.DATABASECHANGELOG
-2026-07-29T14:19:47.368+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
-2026-07-29T14:19:47.590+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.lockservice                    : Successfully acquired change log lock
-2026-07-29T14:19:47.592+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.command                        : Using deploymentId: 5314987592
-2026-07-29T14:19:47.596+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
-2026-07-29T14:19:47.808+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/01-create-users-roles-schema.xml::01-create-roles-table::bookstore
-2026-07-29T14:19:47.829+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : Table roles created
-2026-07-29T14:19:47.830+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/01-create-users-roles-schema.xml::01-create-roles-table::bookstore ran successfully in 19ms
-2026-07-29T14:19:47.845+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/01-create-users-roles-schema.xml::01-create-users-table::bookstore
-2026-07-29T14:19:47.851+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : Table users created
-2026-07-29T14:19:47.851+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/01-create-users-roles-schema.xml::01-create-users-table::bookstore ran successfully in 6ms
-2026-07-29T14:19:47.858+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/01-create-users-roles-schema.xml::01-create-user-roles-table::bookstore
-2026-07-29T14:19:47.876+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : Table user_roles created
-2026-07-29T14:19:47.881+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : Primary key added to user_roles (user_id, role_id)
-2026-07-29T14:19:47.882+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/01-create-users-roles-schema.xml::01-create-user-roles-table::bookstore ran successfully in 23ms
-2026-07-29T14:19:47.889+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/02-create-books-schema.xml::02-create-books-table::bookstore
-2026-07-29T14:19:47.897+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : Table books created
-2026-07-29T14:19:47.898+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/02-create-books-schema.xml::02-create-books-table::bookstore ran successfully in 8ms
-2026-07-29T14:19:47.903+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/03-insert-initial-users-roles.xml::03-insert-roles-v4::bookstore
-2026-07-29T14:19:47.906+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into roles
-2026-07-29T14:19:47.909+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into roles
-2026-07-29T14:19:47.911+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into roles
-2026-07-29T14:19:47.912+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/03-insert-initial-users-roles.xml::03-insert-roles-v4::bookstore ran successfully in 8ms
-2026-07-29T14:19:47.919+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/03-insert-initial-users-roles.xml::03-insert-users-v4::bookstore
-2026-07-29T14:19:47.922+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into users
-2026-07-29T14:19:47.925+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into users
-2026-07-29T14:19:47.928+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into users
-2026-07-29T14:19:47.929+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/03-insert-initial-users-roles.xml::03-insert-users-v4::bookstore ran successfully in 9ms
-2026-07-29T14:19:47.933+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/03-insert-initial-users-roles.xml::03-insert-user-roles-v4::bookstore
-2026-07-29T14:19:47.967+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : Custom SQL executed
-2026-07-29T14:19:47.968+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/03-insert-initial-users-roles.xml::03-insert-user-roles-v4::bookstore ran successfully in 35ms
-2026-07-29T14:19:47.973+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/03-insert-initial-users-roles.xml::03-sync-identity-sequences-v4::bookstore
-2026-07-29T14:19:47.985+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : Custom SQL executed
-2026-07-29T14:19:47.986+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/03-insert-initial-users-roles.xml::03-sync-identity-sequences-v4::bookstore ran successfully in 11ms
-2026-07-29T14:19:48.124+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/04-insert-100-sample-books.xml::04-insert-100-sample-books::bookstore
-2026-07-29T14:19:48.131+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.136+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.141+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.146+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.150+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.154+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.158+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.163+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.168+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.172+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.179+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.183+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.187+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.190+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.193+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.196+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.199+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.201+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.205+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.209+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.212+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.214+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.215+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.216+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.218+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.220+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.223+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.226+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.229+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.231+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.232+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.234+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.235+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.242+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.247+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.251+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.252+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.255+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.258+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.261+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.264+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.266+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.269+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.275+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.279+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.281+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.283+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.288+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.295+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.297+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.299+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.303+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.308+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.312+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.316+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : New row inserted into books
-2026-07-29T14:19:48.325+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/04-insert-100-sample-books.xml::04-insert-100-sample-books::bookstore ran successfully in 200ms
-2026-07-29T14:19:48.356+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.util                           : UPDATE SUMMARY
-2026-07-29T14:19:48.356+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.util                           : Run:                          9
-2026-07-29T14:19:48.356+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.util                           : Previously run:               0
-2026-07-29T14:19:48.356+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.util                           : Filtered out:                 0
-2026-07-29T14:19:48.356+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.util                           : -------------------------------
-2026-07-29T14:19:48.356+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.util                           : Total change sets:            9
-2026-07-29T14:19:48.360+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.util                           : Update summary generated
-2026-07-29T14:19:48.379+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.command                        : Update command completed successfully.
-2026-07-29T14:19:48.382+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.ui                             : Liquibase: Update has been successful. Rows affected: 73
-2026-07-29T14:19:48.389+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.lockservice                    : Successfully released change log lock
-2026-07-29T14:19:48.398+05:30  INFO 27132 --- [bookstore-backend] [           main] liquibase.command                        : Command execution complete
-2026-07-29T14:19:48.885+05:30  INFO 27132 --- [bookstore-backend] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-07-29T14:19:49.139+05:30  INFO 27132 --- [bookstore-backend] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.8.Final
-2026-07-29T14:19:49.285+05:30  INFO 27132 --- [bookstore-backend] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-07-29T14:19:49.789+05:30  INFO 27132 --- [bookstore-backend] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-07-29T14:19:50.025+05:30  WARN 27132 --- [bookstore-backend] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-07-29T14:19:50.098+05:30  INFO 27132 --- [bookstore-backend] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 2.3.232
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2026-07-29T14:19:53.067+05:30  INFO 27132 --- [bookstore-backend] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-07-29T14:19:53.153+05:30  INFO 27132 --- [bookstore-backend] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-07-29T14:19:54.609+05:30  INFO 27132 --- [bookstore-backend] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-07-29T14:19:58.927+05:30  WARN 27132 --- [bookstore-backend] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-07-29T14:19:59.061+05:30  INFO 27132 --- [bookstore-backend] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
-2026-07-29T14:20:02.997+05:30  INFO 27132 --- [bookstore-backend] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 4 endpoints beneath base path '/actuator'
-2026-07-29T14:20:06.516+05:30  INFO 27132 --- [bookstore-backend] [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:bookstoredb'
-2026-07-29T14:20:06.798+05:30  INFO 27132 --- [bookstore-backend] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-07-29T14:20:06.799+05:30  INFO 27132 --- [bookstore-backend] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-07-29T14:20:06.803+05:30  INFO 27132 --- [bookstore-backend] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 3 ms
-2026-07-29T14:20:07.184+05:30  INFO 27132 --- [bookstore-backend] [           main] c.b.controller.AuthControllerTest        : Started AuthControllerTest in 31.508 seconds (process running for 35.231)
+  <testcase name="generateHashes" classname="com.bookstore.BCryptTest" time="1.038">
+    <system-out><![CDATA[ADMIN_HASH: $2a$10$77UNrz4s2CtT448gpqxvMeNtic6XdorYo4hDbm1w.fYHbECWqfamm
+LIBRARIAN_HASH: $2a$10$4WMRD5YadscUmKgZQwbmRuMaL.LXtftZcXfM9kKRFeQ1X7UA/ue7W
+USER_HASH: $2a$10$Gepsduu.BKYZxdNVh09mA.QSdjOCOkzPClaoHfrwhY4aduUDVFGSy
 ]]></system-out>
-    <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build what is described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
-WARNING: A Java agent has been loaded dynamically (C:\Users\Siva\.m2\repository\net\bytebuddy\byte-buddy-agent\1.15.11\byte-buddy-agent-1.15.11.jar)
-WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
-WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
-WARNING: Dynamic loading of agents will be disallowed by default in a future release
-]]></system-err>
   </testcase>
-  <testcase name="testRegister_DuplicateUsername" classname="com.bookstore.controller.AuthControllerTest" time="0.131"/>
-  <testcase name="testLogin_BadCredentials" classname="com.bookstore.controller.AuthControllerTest" time="0.043"/>
-  <testcase name="testRegister_Success" classname="com.bookstore.controller.AuthControllerTest" time="0.06"/>
 </testsuite>
