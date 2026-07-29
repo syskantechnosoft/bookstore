@@ -1,6 +1,23 @@
 import axios from 'axios';
 
-const API_BASE_URL = '/api';
+const getBaseUrl = () => {
+  const envUrl = import.meta.env.VITE_API_BASE_URL;
+  if (envUrl && envUrl.trim() !== '') {
+    let url = envUrl.trim();
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+      url = `https://${url}`;
+    }
+    return url.endsWith('/api') ? url : `${url}/api`;
+  }
+  
+  if (typeof window !== 'undefined' && window.location.hostname.includes('onrender.com')) {
+    return 'https://bookstore-backend-api-mk53.onrender.com/api';
+  }
+
+  return 'http://localhost:8085/api';
+};
+
+const API_BASE_URL = getBaseUrl();
 
 const api = axios.create({
   baseURL: API_BASE_URL,
