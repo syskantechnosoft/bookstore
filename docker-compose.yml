@@ -8,9 +8,9 @@ services:
       dockerfile: Dockerfile
     container_name: bookstore-backend
     ports:
-      - "8080:8080"
+      - "8085:8085"
     environment:
-      - SPRING_PROFILES_ACTIVE=postgres # Change to 'mysql' or 'h2' as needed
+      - SPRING_PROFILES_ACTIVE=postgres
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/bookstoredb
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
