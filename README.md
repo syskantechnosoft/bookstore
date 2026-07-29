@@ -31,7 +31,7 @@ GitHub Repository: [https://github.com/syskantechnosoft/bookstore](https://githu
   - `postgres`: Production-grade PostgreSQL database container (`spring.profiles.active=postgres`).
   - `mysql`: Production-grade MySQL database container (`spring.profiles.active=mysql`).
 - **Liquibase Database Migrations**:
-  - Automatically provisions tables and populates **100 sample book records** across 10 genres.
+  - Automatically provisions tables and populates **100 sample book records** across 10 genres with identity sequence auto-sync (`RESTART WITH 100`).
 - **Redis Caching**: High-performance `@Cacheable` and `@CacheEvict` annotations for book catalog lookups.
 - **Observability**: Prometheus metrics scraped from `/actuator/prometheus` and visualized via pre-configured Grafana dashboards.
 
@@ -54,7 +54,7 @@ GitHub Repository: [https://github.com/syskantechnosoft/bookstore](https://githu
 ```mermaid
 graph TD
     UserClient[Browser / Client] -->|HTTP / React 19.2.8| Nginx[Nginx Reverse Proxy / Port 80]
-    Nginx -->|Proxy /api/| SpringBoot[Spring Boot 4.1.0 Backend / Port 8080]
+    Nginx -->|Proxy /api/| SpringBoot[Spring Boot 4.1.0 Backend / Port 8085]
     Nginx -->|Proxy /swagger-ui/| Swagger[Springdoc Swagger UI]
     
     subgraph Security Layer
@@ -99,12 +99,12 @@ erDiagram
 
     ROLES {
         bigint id PK
-        varchar_50 name UK "NOT NULL (ROLE_ADMIN, ROLE_LIBRARIAN, ROLE_USER)"
+        varchar_20 name UK "NOT NULL"
     }
 
     USER_ROLES {
-        bigint user_id PK, FK
-        bigint role_id PK, FK
+        bigint user_id PK,FK
+        bigint role_id PK,FK
     }
 
     BOOKS {
@@ -112,144 +112,236 @@ erDiagram
         varchar_255 title "NOT NULL"
         varchar_255 author "NOT NULL"
         varchar_20 isbn UK "NOT NULL"
-        decimal_10_2 price "NOT NULL, CHECK >= 0"
-        int published_year "NOT NULL"
-        varchar_100 genre "NOT NULL"
-        int stock "NOT NULL, CHECK >= 0"
-        varchar_1000 description
+        varchar_50 genre "NOT NULL"
+        decimal_10_2 price "NOT NULL, >= 0"
+        integer stock "NOT NULL, >= 0"
+        integer published_year "NOT NULL"
+        text description
     }
 ```
 
 ---
 
-### 3. Component & Class Diagram
+### 3. Component & Class Architecture Diagram
 
 ```mermaid
 classDiagram
-    class AuthController {
-        +login(AuthRequest): AuthResponse
-        +register(RegisterRequest): MessageResponse
-    }
-
     class BookController {
-        +getAllBooks(query, genre, page, size, sortBy, sortDir): Page~BookDto~
-        +getBookById(id): BookDto
-        +createBook(BookDto): BookDto
-        +updateBook(id, BookDto): BookDto
-        +deleteBook(id): MessageResponse
+        +getAllBooks(page, size, sortBy, sortDir, search, genre)
+        +getBookById(id)
+        +createBook(bookDto)
+        +updateBook(id, bookDto)
+        +deleteBook(id)
     }
 
-    class AuthService {
-        +login(AuthRequest): AuthResponse
-        +register(RegisterRequest): String
+    class AuthController {
+        +login(authRequest)
+        +register(registerRequest)
     }
 
     class BookService {
-        +getAllBooks(query, genre, pageable): Page~BookDto~
-        +getBookById(id): BookDto
-        +createBook(BookDto): BookDto
-        +updateBook(id, BookDto): BookDto
-        +deleteBook(id): void
+        +findAll(pageable, search, genre)
+        +findById(id)
+        +create(bookDto)
+        +update(id, bookDto)
+        +delete(id)
+    }
+
+    class AuthService {
+        +login(authRequest)
+        +register(registerRequest)
     }
 
     class BookRepository {
-        +findByIsbn(isbn): Optional~Book~
-        +existsByIsbn(isbn): Boolean
-        +searchBooks(query, genre, pageable): Page~Book~
+        +searchBooks(query, genre, pageable)
+        +findByIsbn(isbn)
+        +existsByIsbn(isbn)
     }
 
-    class JwtAuthenticationFilter {
-        #doFilterInternal(request, response, filterChain)
+    class UserRepository {
+        +findByUsername(username)
+        +existsByUsername(username)
+        +existsByEmail(email)
     }
 
-    class SecurityConfig {
-        +securityFilterChain(HttpSecurity): SecurityFilterChain
-        +passwordEncoder(): PasswordEncoder
-    }
-
-    AuthController --> AuthService
     BookController --> BookService
+    AuthController --> AuthService
     BookService --> BookRepository
-    SecurityConfig --> JwtAuthenticationFilter
+    AuthService --> UserRepository
 ```
 
 ---
 
-### 4. JWT Authentication & RBAC Authorization Sequence Diagram
+### 4. JWT Authentication Sequence Diagram
 
 ```mermaid
 sequenceDiagram
     autonumber
-    actor User as Client / User
-    participant React as React 19 Frontend
-    participant Security as JwtAuthenticationFilter
+    actor User as Client (React UI / Swagger)
     participant AuthCtrl as AuthController
     participant AuthSvc as AuthService
-    participant DB as Database (H2/Postgres/MySQL)
+    participant AuthMgr as AuthenticationManager
+    participant JwtProv as JwtTokenProvider
 
-    User->>React: Enter username & password
-    React->>AuthCtrl: POST /api/auth/login
-    AuthCtrl->>AuthSvc: login(AuthRequest)
-    AuthSvc->>DB: Query User by Username
-    DB-->>AuthSvc: Return User Entity & Hashed Password
-    AuthSvc->>AuthSvc: Verify Password with BCrypt
-    AuthSvc-->>AuthCtrl: Return JWT Token & User Roles
-    AuthCtrl-->>React: 200 OK + JWT Bearer Token
-    React->>React: Store JWT in LocalStorage
-
-    Note over User, DB: Subsequent Authenticated Request
-    User->>React: Click "Add Book" (Librarian/Admin)
-    React->>Security: POST /api/books (Header: Authorization Bearer <token>)
-    Security->>Security: Validate JWT Signature & Extract Roles
-    alt Valid Token & Authorized Role (ADMIN / LIBRARIAN)
-        Security->>DB: Process Request & Execute Mutation
-        DB-->>Security: Mutation Success
-        Security-->>React: 201 Created + Saved Book
-    else Invalid Token or User Role (USER - Read Only)
-        Security-->>React: 403 Forbidden / 401 Unauthorized
-    end
+    User->>AuthCtrl: POST /api/auth/login {username, password}
+    AuthCtrl->>AuthSvc: login(authRequest)
+    AuthSvc->>AuthMgr: authenticate(UsernamePasswordAuthenticationToken)
+    AuthMgr-->>AuthSvc: Authentication Success
+    AuthSvc->>JwtProv: generateToken(authentication)
+    JwtProv-->>AuthSvc: Bearer JWT Token String
+    AuthSvc-->>AuthCtrl: AuthResponse DTO
+    AuthCtrl-->>User: 200 OK + JWT Token Payload
 ```
 
 ---
 
-### 5. Book CRUD Operations & Redis Caching Sequence Diagram
+### 5. Book CRUD & Redis Caching Sequence Diagram
 
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Client as React Client
-    participant Controller as BookController
-    participant Service as BookService
+    actor Client as Client (React UI / Swagger)
+    participant Ctrl as BookController
+    participant Svc as BookService
     participant Cache as Redis Cache
     participant Repo as BookRepository
-    participant DB as Database
+    participant DB as Active Database (Postgres/H2/MySQL)
 
-    Note over Client, DB: Cacheable Read Flow (GET /api/books/{id})
-    Client->>Controller: GET /api/books/1
-    Controller->>Service: getBookById(1)
-    Service->>Cache: Check "books::1"
+    Client->>Ctrl: GET /api/books/{id}
+    Ctrl->>Svc: getBookById(id)
+    Svc->>Cache: Check Key "books::id"
     alt Cache Hit
-        Cache-->>Service: Return Cached BookDto
+        Cache-->>Svc: Return Cached Book DTO
     else Cache Miss
-        Service->>Repo: findById(1)
-        Repo->>DB: SELECT * FROM books WHERE id=1
-        DB-->>Repo: Return Book Record
-        Repo-->>Service: Return Book Entity
-        Service->>Cache: Save to "books::1"
-        Service-->>Controller: Return BookDto
+        Svc->>Repo: findById(id)
+        Repo->>DB: SELECT * FROM books WHERE id=?
+        DB-->>Repo: Book Entity
+        Repo-->>Svc: Book Entity
+        Svc->>Cache: Save Key "books::id"
     end
-    Controller-->>Client: 200 OK (Book Data)
+    Svc-->>Ctrl: Book DTO
+    Ctrl-->>Client: 200 OK
 
-    Note over Client, DB: Cache Eviction Write Flow (PUT /api/books/{id})
-    Client->>Controller: PUT /api/books/1 (Updated Book)
-    Controller->>Service: updateBook(1, BookDto)
-    Service->>Repo: save(updatedBook)
-    Repo->>DB: UPDATE books SET ... WHERE id=1
-    DB-->>Repo: Updated
-    Service->>Cache: Evict key "books::1" & Clear Search Caches
-    Service-->>Controller: Return Updated BookDto
-    Controller-->>Client: 200 OK
+    Client->>Ctrl: PUT /api/books/{id} (Admin/Librarian)
+    Ctrl->>Svc: updateBook(id, bookDto)
+    Svc->>Repo: save(updatedBook)
+    Repo->>DB: UPDATE books SET ... WHERE id=?
+    DB-->>Repo: Updated Entity
+    Svc->>Cache: Evict Key "books::id" & Clear "books_list"
+    Svc-->>Ctrl: Updated Book DTO
+    Ctrl-->>Client: 200 OK
 ```
+
+---
+
+## Swagger UI Testing Guide & Sample Payloads
+
+Interactive OpenAPI Swagger UI is accessible at:
+- **Local Swagger URL**: `http://localhost:8085/swagger-ui.html`
+- **Cloud Live Swagger URL**: `https://bookstore-backend-api-mk53.onrender.com/swagger-ui.html`
+
+### Step 1: Authentication & Token Generation
+
+#### 1. Login with Demo Account
+- **Endpoint**: `POST /api/auth/login`
+- **Sample Request Body**:
+```json
+{
+  "username": "admin",
+  "password": "Admin@123"
+}
+```
+- **Response**: Copy the `token` string from the JSON response:
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc4NTMyMDI3NiwiZXhwIjoxNzg1NDA2Njc2fQ.e7X_Enb4RFVEZcyLAnI8...",
+  "type": "Bearer",
+  "id": 1,
+  "username": "admin",
+  "email": "admin@bookstore.com",
+  "fullName": "System Administrator",
+  "roles": [
+    "ROLE_ADMIN"
+  ]
+}
+```
+
+#### 2. Register a New User Account
+- **Endpoint**: `POST /api/auth/register`
+- **Sample Request Body**:
+```json
+{
+  "username": "sivaos",
+  "email": "sivaos@gmail.com",
+  "password": "sivaos@123",
+  "fullName": "Sivakumar OS",
+  "roles": [
+    "ROLE_USER"
+  ]
+}
+```
+- **Response**:
+```json
+{
+  "message": "User registered successfully!"
+}
+```
+
+---
+
+### Step 2: Authorize Requests in Swagger UI
+
+1. Click the green **Authorize 🔓** button at the top right of the Swagger UI page.
+2. Enter your JWT token in the Value field: `Bearer <your_copied_jwt_token>` (or paste the raw token).
+3. Click **Authorize**, then **Close**.
+
+---
+
+### Step 3: Book Inventory CRUD Operations
+
+#### 1. Get All Books (Paginated & Filtered)
+- **Endpoint**: `GET /api/books`
+- **Query Parameters**:
+  - `page`: `0`
+  - `size`: `10`
+  - `genre`: `Computer Science` (optional)
+  - `search`: `Clean Code` (optional)
+
+#### 2. Create a New Book (Admin / Librarian Only)
+- **Endpoint**: `POST /api/books`
+- **Sample Request Body**:
+```json
+{
+  "title": "Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+  "author": "Robert C. Martin",
+  "isbn": "978-0134494166",
+  "genre": "Computer Science",
+  "price": 34.99,
+  "stock": 45,
+  "publishedYear": 2017,
+  "description": "Practical software architecture rules and principles for building maintainable systems."
+}
+```
+
+#### 3. Update Existing Book (Admin / Librarian Only)
+- **Endpoint**: `PUT /api/books/{id}`
+- **Sample Request Body**:
+```json
+{
+  "title": "Clean Architecture (Second Edition)",
+  "author": "Robert C. Martin",
+  "isbn": "978-0134494166",
+  "genre": "Software Engineering",
+  "price": 38.50,
+  "stock": 50,
+  "publishedYear": 2024,
+  "description": "Updated guide with microservices and cloud-native architecture patterns."
+}
+```
+
+#### 4. Delete Book (Admin / Librarian Only)
+- **Endpoint**: `DELETE /api/books/{id}`
+- **Response**: `204 No Content`
 
 ---
 
@@ -281,16 +373,6 @@ Render provides free hosting for Docker Web Services, Managed PostgreSQL, and Re
 
 ---
 
-### Option 2: Koyeb (Alternative Free Container Platform)
-
-Koyeb offers free web service micro-instances for Docker apps.
-
-1. Create a free account at [Koyeb.com](https://koyeb.com).
-2. Create a service linking to your GitHub repository `syskantechnosoft/bookstore`.
-3. Set the builder type to **Dockerfile**, using `./backend/Dockerfile` for API and `./frontend/Dockerfile` for UI.
-
----
-
 ## Local Development & Testing
 
 ### Run Backend Unit & Integration Tests:
@@ -304,7 +386,7 @@ mvn clean test "-Dspring.profiles.active=h2"
 docker-compose up --build
 ```
 - **React Frontend**: `http://localhost`
-- **Spring Boot API**: `http://localhost:8080`
-- **Swagger UI**: `http://localhost:8080/swagger-ui.html`
+- **Spring Boot API**: `http://localhost:8085`
+- **Swagger UI**: `http://localhost:8085/swagger-ui.html`
 - **Prometheus**: `http://localhost:9090`
 - **Grafana**: `http://localhost:3000` (User: `admin`, Pass: `admin`)
