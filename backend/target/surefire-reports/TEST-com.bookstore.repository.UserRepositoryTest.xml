@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.bookstore.controller.BookControllerTest" time="5.572" tests="4" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.bookstore.repository.UserRepositoryTest" time="0.17" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -69,76 +69,14 @@
     <property name="java.class.version" value="69.0"/>
     <property name="LOGGED_APPLICATION_NAME" value="[bookstore-backend] "/>
   </properties>
-  <testcase name="testCreateBook_LibrarianRole_Allowed" classname="com.bookstore.controller.BookControllerTest" time="0.153">
-    <system-out><![CDATA[2026-07-29T14:07:01.896+05:30  INFO 27972 --- [bookstore-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.bookstore.controller.BookControllerTest]: BookControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2026-07-29T14:07:01.906+05:30  INFO 27972 --- [bookstore-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.bookstore.BookstoreApplication for test class com.bookstore.controller.BookControllerTest
-
-  .   ____          _            __ _ _
- /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
- \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-  '  |____| .__|_| |_|_| |_\__, | / / / /
- =========|_|==============|___/=/_/_/_/
-
- :: Spring Boot ::                (v3.4.3)
-
-2026-07-29T14:07:02.069+05:30  INFO 27972 --- [bookstore-backend] [           main] c.b.controller.BookControllerTest        : Starting BookControllerTest using Java 25.0.3 with PID 27972 (started by Siva in C:\Users\Siva\.gemini\antigravity\scratch\bookstore\backend)
-2026-07-29T14:07:02.069+05:30  INFO 27972 --- [bookstore-backend] [           main] c.b.controller.BookControllerTest        : The following 1 profile is active: "h2"
-2026-07-29T14:07:03.475+05:30  INFO 27972 --- [bookstore-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2026-07-29T14:07:03.476+05:30  INFO 27972 --- [bookstore-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-07-29T14:07:03.539+05:30  INFO 27972 --- [bookstore-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 59 ms. Found 3 JPA repository interfaces.
-2026-07-29T14:07:03.545+05:30  INFO 27972 --- [bookstore-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2026-07-29T14:07:03.545+05:30  INFO 27972 --- [bookstore-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2026-07-29T14:07:03.562+05:30  INFO 27972 --- [bookstore-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.bookstore.repository.BookRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2026-07-29T14:07:03.563+05:30  INFO 27972 --- [bookstore-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.bookstore.repository.RoleRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2026-07-29T14:07:03.563+05:30  INFO 27972 --- [bookstore-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.bookstore.repository.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2026-07-29T14:07:03.563+05:30  INFO 27972 --- [bookstore-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 14 ms. Found 0 Redis repository interfaces.
-2026-07-29T14:07:04.088+05:30  INFO 27972 --- [bookstore-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
-2026-07-29T14:07:04.090+05:30  INFO 27972 --- [bookstore-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn10: url=jdbc:h2:mem:bookstoredb user=SA
-2026-07-29T14:07:04.090+05:30  INFO 27972 --- [bookstore-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
-2026-07-29T14:07:04.094+05:30  INFO 27972 --- [bookstore-backend] [           main] liquibase.database                       : Set default schema name to PUBLIC
-2026-07-29T14:07:04.447+05:30  INFO 27972 --- [bookstore-backend] [           main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
-2026-07-29T14:07:04.590+05:30  INFO 27972 --- [bookstore-backend] [           main] liquibase.ui                             : Database is up to date, no changesets to execute
-2026-07-29T14:07:04.592+05:30  INFO 27972 --- [bookstore-backend] [           main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
-2026-07-29T14:07:04.602+05:30  INFO 27972 --- [bookstore-backend] [           main] liquibase.util                           : UPDATE SUMMARY
-2026-07-29T14:07:04.603+05:30  INFO 27972 --- [bookstore-backend] [           main] liquibase.util                           : Run:                          0
-2026-07-29T14:07:04.603+05:30  INFO 27972 --- [bookstore-backend] [           main] liquibase.util                           : Previously run:               9
-2026-07-29T14:07:04.603+05:30  INFO 27972 --- [bookstore-backend] [           main] liquibase.util                           : Filtered out:                 0
-2026-07-29T14:07:04.604+05:30  INFO 27972 --- [bookstore-backend] [           main] liquibase.util                           : -------------------------------
-2026-07-29T14:07:04.604+05:30  INFO 27972 --- [bookstore-backend] [           main] liquibase.util                           : Total change sets:            9
-2026-07-29T14:07:04.604+05:30  INFO 27972 --- [bookstore-backend] [           main] liquibase.util                           : Update summary generated
-2026-07-29T14:07:04.605+05:30  INFO 27972 --- [bookstore-backend] [           main] liquibase.command                        : Command execution complete
-2026-07-29T14:07:04.699+05:30  INFO 27972 --- [bookstore-backend] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-07-29T14:07:04.708+05:30  INFO 27972 --- [bookstore-backend] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-07-29T14:07:04.738+05:30  INFO 27972 --- [bookstore-backend] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-07-29T14:07:04.741+05:30  WARN 27972 --- [bookstore-backend] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-07-29T14:07:04.742+05:30  INFO 27972 --- [bookstore-backend] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-2)']
-	Database driver: undefined/unknown
-	Database version: 2.3.232
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2026-07-29T14:07:04.965+05:30  INFO 27972 --- [bookstore-backend] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-07-29T14:07:04.968+05:30  INFO 27972 --- [bookstore-backend] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-07-29T14:07:05.205+05:30  INFO 27972 --- [bookstore-backend] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
-2026-07-29T14:07:05.399+05:30  WARN 27972 --- [bookstore-backend] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-07-29T14:07:06.080+05:30  INFO 27972 --- [bookstore-backend] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 4 endpoints beneath base path '/actuator'
-2026-07-29T14:07:07.029+05:30  INFO 27972 --- [bookstore-backend] [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:bookstoredb'
-2026-07-29T14:07:07.094+05:30  INFO 27972 --- [bookstore-backend] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-07-29T14:07:07.094+05:30  INFO 27972 --- [bookstore-backend] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-07-29T14:07:07.095+05:30  INFO 27972 --- [bookstore-backend] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2026-07-29T14:07:07.168+05:30  INFO 27972 --- [bookstore-backend] [           main] c.b.controller.BookControllerTest        : Started BookControllerTest in 5.249 seconds (process running for 36.106)
-]]></system-out>
-  </testcase>
-  <testcase name="testDeleteBook_AdminRole_Allowed" classname="com.bookstore.controller.BookControllerTest" time="0.026"/>
-  <testcase name="testCreateBook_UserRole_Forbidden" classname="com.bookstore.controller.BookControllerTest" time="0.027"/>
-  <testcase name="testGetAllBooks_UserRole_Allowed" classname="com.bookstore.controller.BookControllerTest" time="0.078">
-    <system-out><![CDATA[2026-07-29T14:07:07.425+05:30  WARN 27972 --- [bookstore-backend] [           main] ration$PageModule$WarningLoggingModifier : Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
-	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
-	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
-
+  <testcase name="testSaveAndFindByUsername" classname="com.bookstore.repository.UserRepositoryTest" time="0.144">
+    <system-out><![CDATA[2026-07-29T14:07:09.696+05:30  INFO 27972 --- [bookstore-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.bookstore.repository.UserRepositoryTest]: UserRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-07-29T14:07:09.714+05:30  INFO 27972 --- [bookstore-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.bookstore.BookstoreApplication for test class com.bookstore.repository.UserRepositoryTest
+Hibernate: select r1_0.id,r1_0.name from roles r1_0 where r1_0.name=?
+Hibernate: insert into users (email,full_name,password,username,id) values (?,?,?,?,default)
+Hibernate: select u1_0.id,u1_0.email,u1_0.full_name,u1_0.password,u1_0.username from users u1_0 where u1_0.username=?
+Hibernate: select u1_0.id from users u1_0 where u1_0.username=? fetch first ? rows only
+Hibernate: select u1_0.id from users u1_0 where u1_0.email=? fetch first ? rows only
 ]]></system-out>
   </testcase>
 </testsuite>

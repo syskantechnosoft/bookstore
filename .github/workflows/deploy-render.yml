@@ -14,11 +14,21 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Trigger Render Deploy Hook (Backend)
-        if: ${{ secrets.RENDER_BACKEND_DEPLOY_HOOK != '' }}
+        env:
+          HOOK: ${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}
         run: |
-          curl -X POST "${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}"
+          if [ -n "$HOOK" ]; then
+            curl -X POST "$HOOK"
+          else
+            echo "RENDER_BACKEND_DEPLOY_HOOK secret is not set, skipping step."
+          fi
 
       - name: Trigger Render Deploy Hook (Frontend)
-        if: ${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK != '' }}
+        env:
+          HOOK: ${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}
         run: |
-          curl -X POST "${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}"
+          if [ -n "$HOOK" ]; then
+            curl -X POST "$HOOK"
+          else
+            echo "RENDER_FRONTEND_DEPLOY_HOOK secret is not set, skipping step."
+          fi
