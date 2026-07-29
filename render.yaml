@@ -25,14 +25,15 @@ services:
           name: bookstore-redis-cache
           property: port
 
-  # React Frontend Web Service
-  - type: web
+  # React Frontend Free Static Web Application
+  - type: static
     name: bookstore-frontend-ui
-    env: docker
-    dockerContext: ./frontend
-    dockerfilePath: ./frontend/Dockerfile
-    plan: free
-    region: oregon
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: ./frontend/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
     envVars:
       - key: VITE_API_BASE_URL
         fromService:
