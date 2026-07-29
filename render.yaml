@@ -2,9 +2,9 @@ services:
   # Spring Boot Backend API Web Service
   - type: web
     name: bookstore-backend-api
-    runtime: docker
-    context: ./backend
-    dockerfile: Dockerfile
+    env: docker
+    dockerContext: ./backend
+    dockerfilePath: ./backend/Dockerfile
     plan: free
     region: oregon
     envVars:
@@ -28,9 +28,9 @@ services:
   # React Frontend Web Service
   - type: web
     name: bookstore-frontend-ui
-    runtime: docker
-    context: ./frontend
-    dockerfile: Dockerfile
+    env: docker
+    dockerContext: ./frontend
+    dockerfilePath: ./frontend/Dockerfile
     plan: free
     region: oregon
     envVars:
